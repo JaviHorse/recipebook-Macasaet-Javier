@@ -1,7 +1,15 @@
 from django.db import models
-
-# Create your models here.
 from django.urls import reverse
+from django.contrib.auth.models import User
+
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    name = models.CharField(max_length=50)
+    short_bio = models.TextField(blank=True)
+
+    def __str__(self):
+        return '{}'.format(self.name)
 
 
 class Ingredient(models.Model):
@@ -16,6 +24,17 @@ class Ingredient(models.Model):
 
 class Recipe(models.Model):
     name = models.CharField(max_length=100)
+
+    author = models.ForeignKey(
+        Profile,
+        on_delete=models.CASCADE,
+        related_name='recipes',
+        null=True,
+        blank=True,
+    )
+
+    created_on = models.DateTimeField(auto_now_add=True)
+    updated_on = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return '{}'.format(self.name)
