@@ -8,12 +8,12 @@
     <h1>Recipe Book</h1>
 
     {% if user.is_authenticated %}
-      <form method="POST" action="{% url 'logout' %}?next=/accounts/login/">
+      <form method="POST" action="{% url 'logout' %}">
         {% csrf_token %}
         <button type="submit">Logout</button>
       </form>
     {% else %}
-      <a href="/accounts/login/?next=/recipes/list">Login</a>
+      <a href="{% url 'login' %}">Login</a>
     {% endif %}
   </div>
 
