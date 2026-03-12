@@ -3,6 +3,8 @@
 {% block title %}Recipe List{% endblock %}
 
 {% block content %}
+  <p><a href="{% url 'ledger:recipe-add' %}">Add Recipe</a></p>
+
   <ul>
     {% for recipe in recipes %}
       <li><a href="{{ recipe.get_absolute_url }}">{{ recipe.name }}</a></li>
